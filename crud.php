@@ -15,7 +15,7 @@ if (isset($_POST["delete_student"])){
     
 
     try{
-        $query = "DELETE FROM samplee WHERE Id=:stud_id";
+        $query = "DELETE FROM sample WHERE Id=:stud_id";
         $statement = $databaseConnection->prepare($query);
         $data =[
             ':stud_id' => $student_id
@@ -25,6 +25,7 @@ if (isset($_POST["delete_student"])){
 
         $query_execute = $statement->execute($data);
         if ($query_execute){
+            echo '<script> alert ("Are you sure want to delete?")</script>';
             header('location: students.php');
         }else{
             
@@ -42,7 +43,7 @@ if (isset($_POST["update_student"])){
     $course = $_POST['course'];
 
     try{
-        $query = "UPDATE samplee SET firstname=:firstname, lastname=:lastname, email=:email, course=:course WHERE Id=:stud_id";
+        $query = "UPDATE sample SET firstname=:firstname, lastname=:lastname, email=:email, course=:course WHERE Id=:stud_id";
         $statement = $databaseConnection->prepare($query);
         $data =[
             ':firstname' => $firstname,
@@ -53,6 +54,7 @@ if (isset($_POST["update_student"])){
         ];
         $query_execute = $statement->execute($data);
         if ($query_execute){
+            
             header('location: students.php');
         }else{
             //echo '<script> alert("Data NOT added")</script>';
